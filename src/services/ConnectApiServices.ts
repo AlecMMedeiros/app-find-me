@@ -18,8 +18,8 @@ export default class ConnectApiServices {
   private setBaseURL (market : string){
     if (market === "Mercado Livre"){
       return this._baseURL = `https://api.mercadolibre.com/sites/MLB/search?category=${this._category}&q=${this._searchTerm}`;
-    } else if ( market === "Buscapé") {
-      //Not implemented
+    } else if ( market === "Buscape") {
+      return this._baseURL = `http://localhost:3001/api/search?searchTerm=${this._searchTerm}&category=${this._category}`;
     }
     return null;
   };
