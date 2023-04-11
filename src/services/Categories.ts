@@ -17,9 +17,26 @@ export default class Categories {
     this._categoryName = "TV";
     return "MLB1002"
   }
-  
+
+  private buscapeCategories(category: string){
+    if ( category === "Celulares"){
+      this._categoryName = "Celulares";
+      return "7";
+    }else if (category === "Geladeiras") {
+      this._categoryName = "Geladeiras";
+      return "8";
+    }
+    this._categoryName = "TV";
+    return "3"
+  }
+
   public getCategory (category: string){
-    return this.mercadoCategories(category)
+    if (this._market === "Mercado Livre") {
+      return this.mercadoCategories(category)
+    }
+    if (this._market === "Buscape") {
+      return this.buscapeCategories(category)
+    }
   }
 
   get market(): string {

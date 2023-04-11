@@ -1,15 +1,7 @@
 import React from 'react';
-
-interface Product {
-    photo: string;
-    description: string;
-    category: string;
-    price: number;
-    website: string;
-}
-
+import IProduct from "../interfaces/IProduct";
 interface ProductCardProps {
-    product: Product;
+    product: IProduct;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {

@@ -7,13 +7,13 @@ export default class CurrencyFormat {
         this._locales = locales;
     }
 
-    public formatCurrency (price: string){
+    public formatCurrency (price: number){
         const formatter = new Intl.NumberFormat(this._locales, {
             style: 'currency',
             currency: this._currency,
         });
 
-        return formatter.format(parseInt(price));
+        return formatter.format(price);
     }
 
 }
