@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Categories from "../services/Categories";
 import CurrencyFormat from "../services/CurrencyFormat";
+import ConnectApiServices from "../services/ConnectApiServices";
+import ProductCard from "../components/ProductCard";
 
 interface Product {
   photo: string;
@@ -47,7 +48,6 @@ const ProductSearchEngine: React.FC = () => {
 
     const storedProducts = getStoredProducts(category, website, searchTerm);
     if (storedProducts) {
-      console.log(storedProducts.key);
       setProducts(storedProducts);
       return;
     }
@@ -55,10 +55,8 @@ const ProductSearchEngine: React.FC = () => {
     if (website === 'Mercado Livre') {
       const getCategory = new Categories(website);
       const formatCurrency = new CurrencyFormat("BRL", "pt-BR")
-      const response = await axios.get(
-        `https://api.mercadolibre.com/sites/MLB/search?category=${getCategory.setCategory(category)}&q=${searchTerm}`
-      );
-      console.log(formatCurrency.formatCurrency("120"))
+      const getFromAPI = new ConnectApiServices(website, getCategory.getCategory(category), searchTerm);
+      const response =  await getFromAPI.getFromApi();
       productsFromAPI = response.data.results.map((result: { thumbnail: string; title: string; price: string; category: string}) => ({
         photo: result.thumbnail,
         description: result.title,
@@ -78,7 +76,7 @@ const ProductSearchEngine: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={handleSearchSubmit}>        
+      <form onSubmit={handleSearchSubmit}>
         <select value={category} onChange={handleCategoryChange}>
           <option value="Celulares">Celulares</option>
           <option value="Geladeiras">Geladeiras</option>
@@ -95,16 +93,12 @@ const ProductSearchEngine: React.FC = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <ul>        
-        {products.map((product, index) => (
-          <li key={index}>
-            <img src={product.photo} alt={product.description} />
-            <p>{product.description}</p>
-            <p>Categoria: {product.category}</p>
-            <p>Preço: {product.price}</p>
-            <p>Website: {product.website}</p>
-          </li>
-        ))}
+        <ul style={{listStyle:"none"}}>
+          {products.map((product, index) => (
+              <li key={index}>
+                <ProductCard product={product} />
+              </li>
+          ))}
       </ul>
     </div>
   );
