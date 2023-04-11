@@ -18,7 +18,7 @@ export default class Categories {
     return "MLB1002"
   }
   
-  public setCategory (category: string){
+  public getCategory (category: string){
     return this.mercadoCategories(category)
   }
 
