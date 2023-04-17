@@ -22,7 +22,7 @@ const ProductSearchEngine: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
   const getStoredProducts = (category: string, website: string, searchTerm: string) => {
-    const storedProducts = localStorage.getItem(`${category}_${website}_${searchTerm}`);
+    const storedProducts = sessionStorage.getItem(`${category}_${website}_${searchTerm}`);
     if (storedProducts) {
       return JSON.parse(storedProducts);
     }
@@ -30,7 +30,7 @@ const ProductSearchEngine: React.FC = () => {
   };
 
   const storeProducts = (category: string, website: string, searchTerm: string, products: IProduct[]) => {
-    localStorage.setItem(`${category}_${website}_${searchTerm}`, JSON.stringify(products));
+    sessionStorage.setItem(`${category}_${website}_${searchTerm}`, JSON.stringify(products));
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const ProductSearchEngine: React.FC = () => {
   return (
       <div>
         <Header headerState={headerState} onHeaderStateChange={handleHeaderStateChange} />
-        <section className='grid grid-cols-2 grid-flow-row-dense md:grid-cols-4 h-auto gap-2 mx-4 mt-28 items-center shadow-2xl rounded-md bg-[#363636]'>
+        <section className='grid grid-cols-2 grid-flow-row-dense md:grid-cols-4 h-auto justify-items-center mx-4 mt-5 shadow-2xl rounded-md bg-amber-300'>
           {products.map((product, index) => (
               <div key={index}>
                 <ProductCard product={product} />
