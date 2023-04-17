@@ -19,7 +19,7 @@ export default class ConnectApiServices {
     if (market === "Mercado Livre"){
       return this._baseURL = `https://api.mercadolibre.com/sites/MLB/search?category=${this._category}&q=${this._searchTerm}`;
     } else if ( market === "Buscape") {
-      return this._baseURL = `http://localhost:3001/api/search?searchTerm=${this._searchTerm}&category=${this._category}`;
+      return this._baseURL = `https://kppv88hzr1.execute-api.sa-east-1.amazonaws.com/prod/search?searchTerm=${this._searchTerm}&category=${this._category}`;
     }
     return null;
   };

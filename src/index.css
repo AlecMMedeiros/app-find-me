@@ -1,13 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(252 211 100);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
+
+@layer components {
+  .cardClass {
+    @apply flex flex-col w-40 md:w-48 h-[400px] place-content-center justify-self-center items-center gap-2 ring-2 ring-sky-500 rounded-md shadow-md shadow-[#121212] my-2 text-xs text-gray-200 font-josefim bg-[#121212] hover:bg-[#262626] hover:border-2 hover:border-sky-500 hover:ring-2 bottom-10 top-32
+  }
+}
+
